@@ -16,7 +16,7 @@ import jakarta.validation.constraints.Size;
  * Incluye información personal, credenciales y rol de acceso.
  */
 @Entity
-@Table(name = "users")
+@Table(name = "tb_users")
 @Data
 public class User {
 
