@@ -12,7 +12,7 @@ import java.util.Optional;
  * Controlador para autenticación y registro de usuarios.
  */
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
