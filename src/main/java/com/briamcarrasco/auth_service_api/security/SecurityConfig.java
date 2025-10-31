@@ -8,8 +8,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Clase de configuración de seguridad para la aplicación.
- * Define los beans necesarios para la seguridad, como el codificador de contraseñas.
+ * Configuración de seguridad para la aplicación.
+ * Define los beans necesarios para la seguridad, como el codificador de contraseñas
+ * y la cadena de filtros de seguridad.
  */
 @Configuration
 public class SecurityConfig {
@@ -25,13 +26,20 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
+    /**
+     * Configura la cadena de filtros de seguridad de Spring Security.
+     * En este caso, deshabilita CSRF y permite todas las solicitudes sin autenticación.
+     *
+     * @param http Objeto HttpSecurity para configurar la seguridad HTTP.
+     * @return SecurityFilterChain configurada.
+     * @throws Exception Si ocurre un error en la configuración.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll() 
+                .anyRequest().permitAll()
             );
         return http.build();
     }

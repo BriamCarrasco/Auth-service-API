@@ -38,9 +38,11 @@ public interface UserService {
     void deleteById(Long id);
 
     /**
-     * Obtiene un usuario por su ID.
-     * @param id Identificador del usuario.
-     * @return Usuario encontrado, vacío si no existe.
+     * Busca y retorna un usuario por su ID.
+     * Lanza una excepción ResourceNotFoundException si el usuario no existe.
+     * 
+     * @param id Identificador único del usuario.
+     * @return Usuario encontrado.
      */
     User findById(Long id);
 

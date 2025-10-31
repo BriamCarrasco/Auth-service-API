@@ -70,8 +70,12 @@ public class User {
     private String password;
 
     /**
-     * Rol del usuario en el sistema (por ejemplo: "users" o "admin").
+     * Rol del usuario en el sistema (solo puede ser "users" o "admin").
      */
+    @Pattern(
+        regexp = "^(users|admin)$",
+        message = "El rol solo puede ser 'users' o 'admin'"
+    )
     @Column(name = "role")
     private String role;
 

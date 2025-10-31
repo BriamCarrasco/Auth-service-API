@@ -6,7 +6,6 @@ import com.briamcarrasco.auth_service_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -101,9 +100,11 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Busca un usuario por su ID.
+     * Lanza una excepción ResourceNotFoundException si el usuario no existe.
      *
      * @param id Identificador del usuario.
-     * @return Usuario encontrado, vacío si no existe.
+     * @return Usuario encontrado.
+     * @throws ResourceNotFoundException si el usuario no existe.
      */
     @Override
     public User findById(Long id) {
