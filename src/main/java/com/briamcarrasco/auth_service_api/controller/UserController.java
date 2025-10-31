@@ -5,9 +5,7 @@ import com.briamcarrasco.auth_service_api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Controlador para la gestión de usuarios.
@@ -34,11 +32,10 @@ public class UserController {
      * @param id Identificador del usuario.
      * @return Usuario encontrado o 404 si no existe.
      */
-    @GetMapping("/{id}")
+   @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        Optional<User> userOpt = userService.findById(id);
-        return userOpt.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        User user = userService.findById(id);
+        return ResponseEntity.ok(user);
     }
 
     /**
