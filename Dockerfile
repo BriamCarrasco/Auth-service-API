@@ -14,7 +14,7 @@ COPY --from=build /app/target/*.jar app.jar
 COPY src/main/resources/application.properties ./application.properties
 COPY Wallet_FULLSTACKIII ./Wallet_FULLSTACKIII
 
-EXPOSE 8082
+EXPOSE 8081
 
 ENV SPRING_CONFIG_LOCATION=./application.properties
 
