@@ -10,11 +10,13 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Manejador global de excepciones para la API.
  * Captura y personaliza las respuestas de error para diferentes tipos de excepciones.
  */
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -100,12 +102,21 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGeneralException(Exception ex, WebRequest request) {
+        // Evitar interceptar peticiones a Swagger
+        String path = request.getDescription(false).replace("uri=", "");
+        if (path.startsWith("/v3/api-docs") || path.startsWith("/swagger-ui")) {
+            throw new RuntimeException(ex); // deja que Spring maneje el error
+        }
+
+        log.error("Error interno del servidor: ", ex);
+
         Map<String, Object> error = new HashMap<>();
         error.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         error.put("timestamp", LocalDateTime.now());
-        error.put("error", "Ha ocurrido un error inesperado en el servidor. Por favor, contacte al administrador.");
-        error.put("detalle", ex.getMessage());
-        error.put("path", request.getDescription(false).replace("uri=", ""));
+        error.put("error", "Error interno del servidor");
+        error.put("message", "Ha ocurrido un problema inesperado. Por favor, intente más tarde.");
+        error.put("path", path);
+
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 }
