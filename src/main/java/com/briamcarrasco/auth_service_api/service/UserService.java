@@ -42,7 +42,7 @@ public interface UserService {
      * @param id Identificador del usuario.
      * @return Usuario encontrado, vacío si no existe.
      */
-    Optional<User> findById(Long id);
+    User findById(Long id);
 
     /**
      * Obtiene la lista de todos los usuarios.

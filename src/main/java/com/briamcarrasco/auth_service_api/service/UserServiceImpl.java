@@ -1,5 +1,6 @@
 package com.briamcarrasco.auth_service_api.service;
 
+import com.briamcarrasco.auth_service_api.exception.ResourceNotFoundException;
 import com.briamcarrasco.auth_service_api.model.User;
 import com.briamcarrasco.auth_service_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,8 +106,9 @@ public class UserServiceImpl implements UserService {
      * @return Usuario encontrado, vacío si no existe.
      */
     @Override
-    public Optional<User> findById(Long id) {
-        return userRepository.findById(id);
+    public User findById(Long id) {
+        return userRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con id: " + id));
     }
 
     /**
