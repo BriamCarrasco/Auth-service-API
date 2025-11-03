@@ -62,10 +62,6 @@ public class User {
      * Contraseña del usuario.
      * Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.
      */
-    @Pattern(
-        regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-        message = "La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial"
-    )
     @Column(name = "password")
     private String password;
 
