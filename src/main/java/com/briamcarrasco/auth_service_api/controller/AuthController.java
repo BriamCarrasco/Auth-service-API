@@ -4,7 +4,7 @@ import com.briamcarrasco.auth_service_api.model.User;
 import com.briamcarrasco.auth_service_api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*; // asegura que esté este import
+import org.springframework.web.bind.annotation.*; 
 import java.util.Optional;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
